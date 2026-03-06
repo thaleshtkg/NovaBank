@@ -9,10 +9,10 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:unit": "vitest run src/__tests__/utils",
-    "test:components": "vitest run src/__tests__/components",
-    "test:pages": "vitest run src/__tests__/pages",
-    "test:context": "vitest run src/__tests__/context",
+    "test:unit": "vitest run ../AutomationTests/frontend/utils",
+    "test:components": "vitest run ../AutomationTests/frontend/components",
+    "test:pages": "vitest run ../AutomationTests/frontend/pages",
+    "test:context": "vitest run ../AutomationTests/frontend/context",
     "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {

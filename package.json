@@ -6,7 +6,20 @@
     "test:e2e:headed": "npx playwright test --headed",
     "test:e2e:chrome": "npx playwright test --project=chromium",
     "test:infra": "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js",
-    "test:infra:watch": "vitest --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js"
+    "test:infra:watch": "vitest --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js",
+    "test:infra:system":      "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"1. System requirements\"",
+    "test:infra:env":         "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"2. Environment config\"",
+    "test:infra:docker":      "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"3. Docker services\"",
+    "test:infra:ports":       "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"4. Port connectivity\"",
+    "test:infra:db":          "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"5. Database connectivity\"",
+    "test:infra:redis":       "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"6. Cache\"",
+    "test:infra:api":         "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"7. API health\"",
+    "test:infra:frontend":    "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"8. Frontend dev server\"",
+    "test:infra:consistency": "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js -t \"9. Cross-service\"",
+    "test:all":               "node AutomationTests/run-all-tests.js",
+    "test:all:stop":          "node AutomationTests/run-all-tests.js --stop-on-failure",
+    "test:all:skip-infra":    "node AutomationTests/run-all-tests.js --skip-infra",
+    "test:all:quick":         "node AutomationTests/run-all-tests.js --skip-infra --skip-browser"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",

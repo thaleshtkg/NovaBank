@@ -1,0 +1,18 @@
+feat(tests): add master test runner and TestRunner guide to AutomationTests/
+
+- AutomationTests/run-all-tests.js: Node.js ESM script that executes all 18
+  test stages in order (9 infra + 4 backend + 4 frontend + 1 browser E2E)
+  with coloured output, per-stage timing, a summary table, and CLI flags
+  (--stop-on-failure, --skip-infra, --skip-browser, --stages <ids>)
+
+- AutomationTests/TestRunner.md: full reference guide covering prerequisites,
+  quick-start steps, stage map, per-category run commands, flag combinations,
+  folder structure, infra failure diagnosis table, and fresh-machine setup order
+
+- root package.json: added 9 granular test:infra:* scripts (one per preflight
+  describe block), plus test:all / test:all:stop / test:all:skip-infra /
+  test:all:quick convenience shortcuts
+
+- frontend/package.json: fixed test:unit / test:components / test:pages /
+  test:context scripts to reference AutomationTests/frontend/* paths (were
+  pointing at the now-deleted src/__tests__/ directories)

@@ -1,0 +1,26 @@
+{
+  "name": "novabank-backend",
+  "version": "1.0.0",
+  "description": "NovaBank QA Testing Backend API",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "seed": "node src/db/schema.js",
+    "test": "jest --forceExit --detectOpenHandles",
+    "test:unit": "jest --testPathPattern=tests/unit --forceExit --detectOpenHandles",
+    "test:smoke": "jest --testPathPattern=tests/smoke --forceExit --detectOpenHandles"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.7.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.2.2"
+  }
+}

@@ -149,29 +149,13 @@ function seedTestDb(db) {
 }
 
 function createTestApp(db) {
-  const connectionPath = require.resolve('../src/db/connection');
-  require.cache[connectionPath] = {
-    id: connectionPath,
-    filename: connectionPath,
-    loaded: true,
-    exports: db,
-  };
-
-  const routeModules = [
-    '../src/routes/auth',
-    '../src/routes/account',
-    '../src/routes/payees',
-    '../src/routes/transfers',
-    '../src/routes/transactions',
-    '../src/routes/bills',
-    '../src/routes/fixedDeposits',
-    '../src/routes/notifications',
-    '../src/routes/admin',
-    '../src/db/schema',
-  ];
-
-  for (const mod of routeModules) {
-    delete require.cache[require.resolve(mod)];
+  // Use Jest's mock system (jest.doMock) to inject the in-memory database
+  // before requiring any route modules. This is more reliable than manipulating
+  // require.cache directly because Jest intercepts the module require through its
+  // own mock registry, ensuring route modules always get our in-memory db.
+  if (typeof jest !== 'undefined') {
+    jest.doMock('../src/db/connection', () => db);
+    jest.resetModules();
   }
 
   const app = express();

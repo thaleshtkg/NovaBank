@@ -4,9 +4,12 @@
   "scripts": {
     "test:e2e": "npx playwright test",
     "test:e2e:headed": "npx playwright test --headed",
-    "test:e2e:chrome": "npx playwright test --project=chromium"
+    "test:e2e:chrome": "npx playwright test --project=chromium",
+    "test:infra": "vitest run --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js",
+    "test:infra:watch": "vitest --config AutomationTests/infra/vitest.config.js AutomationTests/infra/preflight.test.js"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2"
+    "@playwright/test": "^1.58.2",
+    "vitest": "^4.0.18"
   }
 }

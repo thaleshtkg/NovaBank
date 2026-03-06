@@ -3,6 +3,7 @@ import { Landmark, Plus, TrendingUp, AlertTriangle, CheckCircle, XCircle } from 
 import { useOutletContext } from 'react-router-dom';
 import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
+import { calculateEstimatedFDReturn } from '../utils/finance';
 import toast from 'react-hot-toast';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -155,7 +156,7 @@ export default function FixedDeposits() {
                       <div className="flex justify-between">
                         <span className="text-gray-500">Est. Returns</span>
                         <span className="font-medium text-success-600">
-                          ${(fd.amount * (fd.interest_rate / 100) * (fd.tenure_months / 12)).toFixed(2)}
+                          ${calculateEstimatedFDReturn(fd.amount, fd.interest_rate, fd.tenure_months).toFixed(2)}
                         </span>
                       </div>
                     </div>
@@ -233,7 +234,7 @@ export default function FixedDeposits() {
               </p>
               {amount && parseFloat(amount) >= 1000 && (
                 <p className="text-xs text-success-600 dark:text-success-500 mt-1">
-                  Estimated returns: ${(parseFloat(amount) * (selectedRate / 100) * (parseInt(tenure) / 12)).toFixed(2)}
+                  Estimated returns: ${calculateEstimatedFDReturn(amount, selectedRate, parseInt(tenure)).toFixed(2)}
                 </p>
               )}
             </div>

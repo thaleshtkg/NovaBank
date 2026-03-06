@@ -1,5 +1,7 @@
 module.exports = {
   testEnvironment: 'node',
-  testMatch: ['**/tests/**/*.test.js'],
+  roots: ['<rootDir>/../AutomationTests/backend'],
+  testMatch: ['**/*.test.js'],
+  modulePaths: ['<rootDir>/node_modules'],
   verbose: true,
 };

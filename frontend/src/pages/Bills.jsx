@@ -3,6 +3,7 @@ import { Receipt, Zap, Droplets, Wifi, Phone, CheckCircle, Clock, AlertTriangle 
 import { useOutletContext } from 'react-router-dom';
 import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
+import { calculateDaysUntilDue, getBillBadgeVariant, getBillDueLabel } from '../utils/finance';
 import toast from 'react-hot-toast';
 import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
@@ -73,7 +74,7 @@ export default function Bills() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4" data-testid="pending-bills">
                 {pending.map(bill => {
                   const Icon = categoryIcons[bill.category] || Receipt;
-                  const daysUntilDue = Math.ceil((new Date(bill.due_date) - new Date()) / (1000 * 60 * 60 * 24));
+                  const daysUntilDue = calculateDaysUntilDue(bill.due_date);
                   return (
                     <Card key={bill.id} className="p-5">
                       <div className="flex items-start justify-between">
@@ -86,8 +87,8 @@ export default function Bills() {
                             <p className="text-xs text-gray-400 capitalize">{bill.category}</p>
                           </div>
                         </div>
-                        <Badge variant={daysUntilDue <= 5 ? 'danger' : 'warning'}>
-                          {daysUntilDue <= 0 ? 'Overdue' : `Due in ${daysUntilDue}d`}
+                        <Badge variant={getBillBadgeVariant(daysUntilDue)}>
+                          {getBillDueLabel(daysUntilDue)}
                         </Badge>
                       </div>
                       <div className="flex items-center justify-between mt-4">

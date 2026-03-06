@@ -7,9 +7,11 @@
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
     "seed": "node src/db/schema.js",
-    "test": "jest --forceExit --detectOpenHandles",
-    "test:unit": "jest --testPathPattern=tests/unit --forceExit --detectOpenHandles",
-    "test:smoke": "jest --testPathPattern=tests/smoke --forceExit --detectOpenHandles"
+    "test": "jest --runInBand --forceExit",
+    "test:unit": "jest --runInBand --testPathPattern=tests/unit --forceExit",
+    "test:smoke": "jest --runInBand --testPathPattern=tests/smoke --forceExit",
+    "test:integration": "jest --runInBand --testPathPattern=tests/integration --forceExit",
+    "test:e2e": "jest --runInBand --testPathPattern=tests/e2e --forceExit"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

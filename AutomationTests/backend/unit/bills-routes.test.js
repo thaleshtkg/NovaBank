@@ -65,7 +65,7 @@ describe('Bills Routes', () => {
         .get('/api/bills')
         .set('Authorization', `Bearer ${token}`);
       const paidBill = billsRes.body.bills.find(b => b.status === 'paid');
-      if (!paidBill) return;
+      expect(paidBill, 'Expected a paid bill to exist after the previous test paid one — check test ordering').toBeDefined();
 
       const res = await request(app)
         .post(`/api/bills/${paidBill.id}/pay`)

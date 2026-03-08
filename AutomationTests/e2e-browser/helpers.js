@@ -1,9 +1,10 @@
 async function resetDatabase() {
-  const response = await fetch('http://localhost:3000/api/admin/reset', {
+  const baseUrl = process.env.BACKEND_BASE_URL || 'http://localhost:3000';
+  const response = await fetch(`${baseUrl}/api/admin/reset`, {
     method: 'POST',
   });
   if (!response.ok) {
-    throw new Error(`Failed to reset database: ${response.status}`);
+    throw new Error(`Failed to reset database: ${response.status} (target: ${baseUrl})`);
   }
 }
 

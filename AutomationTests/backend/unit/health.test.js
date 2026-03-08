@@ -1,5 +1,6 @@
 const request = require('supertest');
 const { createTestDb, seedTestDb, createTestApp } = require('../../helpers/backend-setup');
+const { version: EXPECTED_VERSION } = require('../../../backend/package.json');
 
 let db, app;
 
@@ -20,6 +21,6 @@ describe('Health Check', () => {
     expect(res.status).toBe(200);
     expect(res.body.status).toBe('ok');
     expect(res.body.name).toBe('NovaBank API');
-    expect(res.body.version).toBe('1.0.0');
+    expect(res.body.version).toBe(EXPECTED_VERSION);
   });
 });

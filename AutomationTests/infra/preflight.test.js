@@ -24,7 +24,7 @@ const BACKEND_DIR = path.join(ROOT, 'backend');
 const FRONTEND_DIR = path.join(ROOT, 'frontend');
 const BACKEND_PORT = 3000;
 const FRONTEND_PORT = 5174;
-const PLAYWRIGHT_EXPECTED_FRONTEND_PORT = 5173; // from playwright.config.js
+// PLAYWRIGHT_EXPECTED_FRONTEND_PORT removed — the assertion below uses FRONTEND_PORT directly.
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 

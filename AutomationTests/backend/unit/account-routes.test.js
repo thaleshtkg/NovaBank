@@ -59,6 +59,15 @@ describe('Account Routes', () => {
   });
 
   describe('PUT /api/account/profile', () => {
+    afterEach(async () => {
+      // Restore the seeded defaults after each mutation test so later tests
+      // see a clean baseline regardless of whether the previous test passed.
+      await request(app)
+        .put('/api/account/profile')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ name: 'John Doe', phone: '555-0101' });
+    });
+
     test('updates name', async () => {
       const res = await request(app)
         .put('/api/account/profile')
@@ -66,11 +75,6 @@ describe('Account Routes', () => {
         .send({ name: 'John Updated' });
       expect(res.status).toBe(200);
       expect(res.body.user.name).toBe('John Updated');
-
-      await request(app)
-        .put('/api/account/profile')
-        .set('Authorization', `Bearer ${token}`)
-        .send({ name: 'John Doe' });
     });
 
     test('updates phone', async () => {
@@ -80,11 +84,6 @@ describe('Account Routes', () => {
         .send({ phone: '555-9999' });
       expect(res.status).toBe(200);
       expect(res.body.user.phone).toBe('555-9999');
-
-      await request(app)
-        .put('/api/account/profile')
-        .set('Authorization', `Bearer ${token}`)
-        .send({ phone: '555-0101' });
     });
 
     test('rejects empty body', async () => {

@@ -49,7 +49,7 @@ describe('Notifications Routes', () => {
         .get('/api/notifications')
         .set('Authorization', `Bearer ${token}`);
       const unread = notifsRes.body.notifications.find(n => !n.is_read);
-      if (!unread) return;
+      expect(unread, 'Expected an unread notification to exist in the seeded data').toBeDefined();
 
       const res = await request(app)
         .put(`/api/notifications/${unread.id}/read`)

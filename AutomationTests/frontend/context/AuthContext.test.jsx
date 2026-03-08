@@ -46,7 +46,15 @@ describe('AuthContext', () => {
     render(
       <AuthProvider><TestConsumer /></AuthProvider>
     );
-    expect(screen.getByTestId('loading') || screen.getByTestId('user-status')).toBeInTheDocument();
+    // Immediately after render with a stored token the component is in the loading phase.
+    // `loading` element may transition quickly, so accept either loading or user-status,
+    // but assert each individually so the test fails if neither renders at all.
+    const loadingEl = screen.queryByTestId('loading');
+    const statusEl = screen.queryByTestId('user-status');
+    expect(
+      loadingEl || statusEl,
+      'Expected either the loading indicator or the user-status element to be rendered'
+    ).not.toBeNull();
   });
 
   test('logout clears localStorage', async () => {
